@@ -14,7 +14,7 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build && webpack --config webpack.renderer.config.js",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\" \"test/**/*.ts\"",
     "start": "electron-forge start",
     "dev": "run-p renderer:dev start:dev",
     "desktop": "electron ./dist/main/main.js",
@@ -80,6 +80,8 @@
     "@nestjs/platform-express": "^7.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "nestjs-electron-ipc-transport": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4"

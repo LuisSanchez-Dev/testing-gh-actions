@@ -11,5 +11,8 @@
     "outDir": "./dist/main",
     "baseUrl": "./",
     "incremental": true
-  }
+  },
+  "exclude": [
+    "src/renderer/*"
+  ]
 }

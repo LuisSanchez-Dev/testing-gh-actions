@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "removeComments": true,
     "module": "ES2015",
     "target": "ES5",
@@ -10,7 +11,12 @@
     "moduleResolution": "Node",
     "rootDir": "./src/renderer"
   },
-  "include": ["src/renderer/*"],
-  "exclude": ["node_modules",
-    "src/main/bridge", "src/main"]
+  "include": [
+    "src/renderer/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "src/main/bridge",
+    "src/main"
+  ]
 }

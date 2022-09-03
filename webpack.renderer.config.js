@@ -2,7 +2,8 @@ const path = require('path');
 const copyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/renderer/app.ts'),
+  entry: path.resolve(__dirname, 'src/renderer/index.tsx'),
+  mode: 'development',
   output: {
     filename: 'bundle.js',
     path: path.join(__dirname, 'dist/renderer'),
