@@ -1,0 +1,120 @@
+{
+  "name": "sugoi-chatbot",
+  "productName": "Sugoi Chatbot",
+  "version": "0.0.0",
+  "description": "A sugoi chatbot for Twitch with a custom name",
+  "author": "Luis Sanchez",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/main/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LuisSanchez-Dev/sugoi-chatbot.git"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "nest build && webpack --config webpack.renderer.config.js",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "electron-forge start",
+    "dev": "run-p renderer:dev start:dev",
+    "desktop": "electron ./dist/main/main.js",
+    "renderer:dev": "webpack --config webpack.renderer.config.js --watch",
+    "start:dev": "nest start --watch --exec \"yarn desktop\"",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "package": "yarn build && electron-forge package",
+    "make": "yarn build && electron-forge make"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "asar": true,
+        "icon": "assets/logo.ico"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "platforms": [
+            "win32"
+          ],
+          "config": {
+            "name": "sugoi-chatbot",
+            "loadingGif": "assets/logo.png",
+            "setupIcon": "assets/logo.ico",
+            "iconUrl": "https://github.com/LuisSanchez-Dev/sugoi-chatbot/blob/main/assets/logo.ico?raw=true"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "win32"
+          ]
+        }
+      ]
+    }
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@nestjs/common": "^7.0.0",
+    "@nestjs/core": "^7.0.0",
+    "@nestjs/microservices": "^7.4.4",
+    "@nestjs/platform-express": "^7.0.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "nestjs-electron-ipc-transport": "^1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^6.5.4"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.65",
+    "@electron-forge/maker-deb": "^6.0.0-beta.65",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.65",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.65",
+    "@electron-forge/maker-zip": "^6.0.0-beta.65",
+    "@nestjs/cli": "^7.0.0",
+    "@nestjs/schematics": "^7.0.0",
+    "@nestjs/testing": "^7.0.0",
+    "@types/electron": "^1.6.10",
+    "@types/express": "^4.17.3",
+    "@types/jest": "25.2.3",
+    "@types/node": "^13.9.1",
+    "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "3.0.2",
+    "@typescript-eslint/parser": "3.0.2",
+    "copy-webpack-plugin": "^6.1.0",
+    "electron": "^10.1.1",
+    "eslint": "7.2.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "26.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.19.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "26.1.0",
+    "ts-loader": "^8.0.3",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.4",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
