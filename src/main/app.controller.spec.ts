@@ -21,6 +21,6 @@ describe('AppController', () => {
 
     it('asd', () => {
       expect(true).toBeFalsy();
-    })
+    });
   });
 });
