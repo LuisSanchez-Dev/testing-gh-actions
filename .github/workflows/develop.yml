@@ -18,7 +18,7 @@ jobs:
       - run: yarn install --silent
       - name: Check formatting
         run: yarn lint
-  unit_test:
+  unit-test:
     name: Unit tests
     needs: lint
     runs-on: ubuntu-latest
@@ -42,5 +42,14 @@ jobs:
           node-version: "16"
           cache: "yarn"
       - run: yarn install --silent
-      - name: Run unit tests
+      - name: Build the project
         run: yarn build
+  mirror-to-main:
+    name: Push to main
+    needs: [unit-test, build]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: zofrex/mirror-branch@v1
+      with:
+        target-branch: main
+        force: false
