@@ -18,5 +18,9 @@ describe('AppController', () => {
     it('should return "Hello World!"', () => {
       expect(appController.getHello()).toMatch(/Hello World! \d{13}/);
     });
+
+    it('asd', () => {
+      expect(true).toBeFalsy();
+    })
   });
 });
