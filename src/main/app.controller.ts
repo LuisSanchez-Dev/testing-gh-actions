@@ -4,20 +4,20 @@ import { AppService } from './app.service';
 import {
   HandleIPCMessageWithResult,
   HandleIPCMessage,
-     IPCContext,
+  IPCContext,
 } from 'nestjs-electron-ipc-transport';
 import { Ctx, Payload } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-        constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) {}
 
   @HandleIPCMessageWithResult('app.getUser')
   getHello() {
     return this.appService.getHello();
   }
 
-      @HandleIPCMessage('app.prompt')
+  @HandleIPCMessage('app.prompt')
   promptFromMain(@Payload() data: string) {
     this.appService.promptMessage(data);
   }
