@@ -47,7 +47,7 @@ jobs:
   make:
     name: Make
     needs: [unit-test, build]
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
