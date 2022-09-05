@@ -44,19 +44,6 @@ jobs:
       - run: yarn install --silent
       - name: Build the project
         run: yarn build
-  make:
-    name: Make
-    needs: [unit-test, build]
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
-        with:
-          node-version: "16"
-          cache: "yarn"
-      - run: yarn install --silent
-      - name: Make the project
-        run: yarn make
   mirror-to-main:
     name: Push to main
     needs: [unit-test, build]
