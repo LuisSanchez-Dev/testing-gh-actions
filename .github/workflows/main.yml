@@ -6,11 +6,11 @@ on:
       - main
 
 env:
-  VERSION: v0.${{ github.run_number }}
+  VERSION: v0.${GITHUB_RUN_NUMBER}
 
 jobs:
   make:
-    name: Make
+    name: Make and release
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
@@ -27,11 +27,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.version }}
-          release_name: Release ${{ env.version }}
+          tag_name: ${VERSION}
+          release_name: Release ${VERSION}
           draft: true
           prerelease: false
-      - uses: actions/upload-release-asset@v1.0.1
+      - name: Upload Windows installer
+        uses: actions/upload-release-asset@v1.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -39,7 +40,17 @@ jobs:
           asset_path: ./out/make/squirrel.windows/x64/Sugoi Chatbot-0.0.0 Setup.exe
           asset_name: sugoi-chatbot-setup.exe
           asset_content_type: application/vnd.microsoft.portable-executable
-      - uses: eregon/publish-release@v1
+      - name: Upload Windows zip
+        uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./out/make/zip/win32/x64/Sugoi Chatbot-win32-x64-1.0.0.zip
+          asset_name: sugoi-chatbot-${VERSION}-win32-x64.zip
+          asset_content_type: application/vnd.microsoft.portable-executable
+      - name: Publish release
+        uses: eregon/publish-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
