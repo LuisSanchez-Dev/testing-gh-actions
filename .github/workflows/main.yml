@@ -18,10 +18,29 @@ jobs:
       - run: yarn install --silent
       - name: Make the project
         run: yarn make
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with: 
-          name: assets-for-download
-          path: out/make/squirrel.windows/x64
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v0.$GITHUB_RUN_NUMBER
+          release_name: Release v0.$GITHUB_RUN_NUMBER
+          draft: true
+          prerelease: false
+      - uses: actions/upload-release-asset@v1.0.1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./out/make/squirrel.windows/x64/Sugoi Chatbot-0.0.0 Setup.exe
+          asset_name: Sugoi Chatbot setup.exe
+          asset_content_type: application/vnd.microsoft.portable-executable
+      - uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.create_release.outputs.id }}
+
 
   
