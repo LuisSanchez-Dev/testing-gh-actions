@@ -53,8 +53,7 @@ jobs:
       with:
         token: ${{secrets.PAT}}
     - run: |
-        git status
-        git branch --all
+        git remote update
         git checkout main
         git merge --ff-only develop
         git push
