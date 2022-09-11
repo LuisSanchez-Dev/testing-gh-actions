@@ -21,10 +21,6 @@ jobs:
       - run: yarn install --silent
       - name: Make the project
         run: yarn make
-      - name: Show files
-        run: |
-          dir ./out/make
-          dir ./out/make/zip/win32/x64
       - name: Create Draft Release
         id: create_release
         uses: actions/create-release@v1
@@ -50,7 +46,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./out/make/zip/win32/x64/Sugoi Chatbot-win32-x64-1.0.0.zip
+          asset_path: ./out/make/zip/win32/x64/Sugoi Chatbot-win32-x64-0.0.0.zip
           asset_name: sugoi-chatbot-${VERSION}-win32-x64.zip
           asset_content_type: application/vnd.microsoft.portable-executable
       - name: Publish release
