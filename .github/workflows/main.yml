@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  VERSION: v0.${GITHUB_RUN_NUMBER}
+  VERSION: v0.${{ github.run_number }}
 
 jobs:
   make:
