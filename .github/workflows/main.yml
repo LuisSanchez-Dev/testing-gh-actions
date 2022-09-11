@@ -27,8 +27,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${VERSION}
-          release_name: Release ${VERSION}
+          tag_name: ${{ env.version }}
+          release_name: Release ${{ env.version }}
           draft: true
           prerelease: false
       - name: Upload Windows installer
@@ -47,7 +47,7 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
           asset_path: ./out/make/zip/win32/x64/Sugoi Chatbot-win32-x64-0.0.0.zip
-          asset_name: sugoi-chatbot-${VERSION}-win32-x64.zip
+          asset_name: sugoi-chatbot-${{ env.version }}-win32-x64.zip
           asset_content_type: application/vnd.microsoft.portable-executable
       - name: Publish release
         uses: eregon/publish-release@v1
